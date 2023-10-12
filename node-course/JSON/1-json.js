@@ -5,6 +5,17 @@ const book = {
     tittle: 'My book',
     author: 'Me'
 }
+const sohel = {
+    firstName: 'Sohel',
+    lastName: 'Rana',
+    age: 24,
+    job: 'Engineer',
+    phoneNumber: '01521---',
+    location: 'Dhaka, Bangladesh'
+}
+const sohelJSON = JSON.stringify(sohel);
+console.log(sohelJSON)
+
 
 const university = {
     uniName: 'East West University',
