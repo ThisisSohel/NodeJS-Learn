@@ -9,3 +9,5 @@ request({ url: url, json: true}, (error, response) => {
     console.log(response.body.current.weather_descriptions[0] + '- It is currently ' + response.body.current.temperature + ' degree out. It feels like ' + response.body.current.feelslike + '.');
 })
 
+
+console.log('hola')
