@@ -1,5 +1,7 @@
 const path = require('path')
 const express = require('express')
+const hbs = require('hbs')
+
  console.log(__dirname)   //to see the current path
  console.log(__filename)
 
@@ -7,11 +9,13 @@ const app = express()
 
 // Define path for Express Engine
 const publicDirectoryPath = path.join(__dirname, '../public')   
-const viewsPath = path.join(__dirname, '../templates') //customized templates
+const viewsPath = path.join(__dirname, '../templates/views') //customized templates
+const partialsPath = path.join(__dirname, '../templates/partials')
 
 //Setup handelbars engine and views location
 app.set('view engine', 'hbs')  // using for rendering the file
 app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
 
 //Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
