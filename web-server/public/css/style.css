@@ -1,0 +1,26 @@
+h1 {
+    color: azure;
+    background-color: black;
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+.container {
+    background-color: blueviolet;
+    height: fit-content;
+    width: fit-content;
+    padding: 2%;
+}
+.container, header{
+    text-align: center;
+}
+.container,tr{
+    text-align: left;
+}
+img {
+    width: 20%;
+}
