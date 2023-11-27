@@ -5,38 +5,15 @@ const express = require('express')
 
 const app = express()
 
+// Define path for Express Engine
+const publicDirectoryPath = path.join(__dirname, '../public')   
+const viewsPath = path.join(__dirname, '../templates') //customized templates
 
-
-
-//Creating some manual web pages
-
-
-// app.get('', (req, res) => {
-//      res.send('<h1> Weather</h1>')
-// })
-
-// app.get('/help', (req, res) => {
-//     res.send({
-//         name: 'Sohel',
-//         age: 22
-//     })
-// })
-
-// app.get('/about', (req, res) => {
-//     res.send("About the weather status")
-// })
-// app.get('/weather', (req, res) => {
-//      res.send('Weather page')
-// })
-//app.com
-//app.com/help
-
-// Creating some static web pages
-
-const publicDirectoryPath = path.join(__dirname, '../public')   //to access all the files from public folder
-
+//Setup handelbars engine and views location
 app.set('view engine', 'hbs')  // using for rendering the file
+app.set('views', viewsPath)
 
+//Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
 app.get('/index', (req, res) => {   //rendering the index file
@@ -48,7 +25,7 @@ app.get('/index', (req, res) => {   //rendering the index file
 
 app.get('/about', (req, res) => {   //rendering the about file
      res.render('about', {
-         title: 'About myself',
+         title: 'About myself....',
          name: 'Mr. Sohel'
      })
 })
@@ -59,13 +36,6 @@ app.get('/help', (req, res) => {   //rendering the help file
         name: 'Mr. Sohel'
      })
 })
-
-// app.get('/weather', (req, res) => {
-//     res.send({
-//         forecast: 'It is snowing',
-//         location: 'Dhaka'
-//     })
-// })
 
 app.listen(3000, () => {
     console.log('Server on port 3000.')
