@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Index Page</title>
+    <title>Help</title>
+    <link rel="icon" href="/img/weatherIcon.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    {{>header}}
-    {{!-- <p>Created by {{name}}</p> --}}
+    <div class="main-content">
+        {{>header}}
+        {{!-- <p>Created by {{name}}</p> --}}
+        <p>{{helpText}}</p>
+    </div>
+
     {{>footer}}
 </body>
 </html>
