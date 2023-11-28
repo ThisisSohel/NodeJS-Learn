@@ -34,11 +34,19 @@ app.get('/about', (req, res) => {   //rendering the about file
      })
 })
 
-app.get('/help', (req, res) => {   //rendering the help file
-     res.render('help', {
-        title: 'Help page',
-        name: 'Mr. Sohel'
-     })
+app.get('/help/*', (req, res) => { //Wildcat method to access any file afer the power slush
+       res.render('404', {
+        title: '404',
+        name: 'Sohel',
+        errorMessage: 'Help article not found'
+       })
+})
+app.get('*', (req, res) => {
+   res.render('404', {
+      title: '404',
+      name: 'Sohel',
+      errorMessage: 'Page not found.'
+   })
 })
 
 app.listen(3000, () => {
@@ -46,3 +54,5 @@ app.listen(3000, () => {
 })
 
 
+
+// Run all the files together we have to use this command ------nodemon src/app.js -e js,hbs
