@@ -13,8 +13,50 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
 
     const db = client.db(databaseName)
     
-    db.collection('users').insertOne({
-        name: 'Sohel',
-        age: 25
+    //Insert One
+
+    // db.collection('users').insertOne({
+    //     name: 'Sohel',
+    //     age: 25
+    // }, (error, result)=>{  //this is a call-back function. Here the result is showing the data I am inserting.
+    //     if(error){
+    //        return console.log('Unable to connect to database!')
+    //     }
+    //     console.log(result.ops);
+    // })
+
+    //InsertMany
+
+    // db.collection('users').insertMany([
+    //     {
+    //         name: "Rafiq",
+    //         age: 21
+    //     },
+    //     {
+    //         name: "Rakib",
+    //         age: 22
+    //     }
+    // ], (error, result) => {
+    //     if(error){
+    //         return console.log('Unable to insert documents')
+    //     }
+    //     console.log(result.ops)
+    // })
+
+
+    db.collection('tasks').insertMany([
+        {
+            description: "fish buying ",
+            completed: true
+        },
+        {
+            description: "fruits buying",
+            completed: false
+        }
+    ], (error, result) => {
+        if(error){
+            return console.log('Unable to insert documents')
+        }
+        console.log(result.ops)
     })
 })
