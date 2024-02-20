@@ -27,12 +27,12 @@ const addNote = (tittle, body) => {
 }
 
 // removing notes from remove function
-
+ // we can remove notes from here using command- node app.js remove --tittle="my university6"
 const removeNote = (tittle) => {
    const notes = loadNotes();
    const noteToKeep = notes.filter((note) => note.tittle !== tittle)
    if (notes.length > noteToKeep.length){
-       console.log(chalk.red.inverse('Note Removed')); // we can remove notes from here using command node app.js remove --tittle="my university6"
+       console.log(chalk.red.inverse('Note Removed'));
        saveNotes(noteToKeep);
    }else{
     console.log(chalk.blue.inverse('No note found'));
@@ -47,6 +47,7 @@ const removeNote = (tittle) => {
         console.log(note.tittle);
     })
  }
+ 
 
  // read the notes using command :  
 

@@ -1,96 +1,81 @@
 const mongoose = require('mongoose');
-const validator = require('validator')
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-//Defining model  
+// //Defining variable using constructor
 
-const User = mongoose.model('User', {
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true, // Corrected typo here
-        validate(value){
-            if(!validator.isEmail(value)){
-                throw new Error('Email is invalid');
-            }
-        }
-    },
-    password: {
-       type: String,
-       required: true,
-       minlength: 6,
-       trim: true,
-       validate(value){
-        if(value.toLowerCase().includes('password')){
-            throw new Error('Password cannot contain "password"')
-        }
-       }
-    },
-    age: {
-        type: Number,
-        default: 0,
-        validate(value) {  //read more validate DOC from "Mongoosejs.com"
-            if (value < 0) {
-                throw new Error("Age must be a positive number");
-            }
-        }
-    }
-});
+// const newUser = new User({
+//     name: '   Salek Hossain',
+//     //age: 24, // This will trigger the validation error
+//     email: "MDSRANA11@Gmail.com    ",
+//     password: "   12345435435 "
+// });
 
-//Defining variable using constructor
+// // Now using "save" method to save the data to database 
 
-const newUser = new User({
-    name: '   Salek Hossain',
-    //age: 24, // This will trigger the validation error
-    email: "MDSRANA11@Gmail.com    ",
-    password: "   123456789 "
-});
-
-// Now using "save" method to save the data to database 
-
-newUser.save().then(() => {
-    console.log(newUser);
-}).catch((error) => {
-    console.log('Error:', error);
-});
-
-
-//Just for remainder ----:: model create...> constructor create...> sava date to database
-
-
-
-// Craeting another database named "tasks"
-
-// const tasks = mongoose.model('tasks', {
-//     description : {
-//         type: String
-//     },
-//     completed: {
-//         type: Boolean
-//     }
-// })
-
-// // Creating constructor to assign the values
-
-// const myTask = new tasks({
-//     description: "Wall Painting",
-//     completed: false
-// })
-
-// // Now saving the values to the database
-
-// myTask.save().then(() => {
-//     console.log(myTask)
+// newUser.save().then(() => {
+//     console.log(newUser);
 // }).catch((error) => {
-//     console.log("Error", error)
-// })
+//     console.log('Error:', error.massage);
+// });
+
+//Read user info
+
+
+// Find the user by email
+// User.findOne({ age: 24 })
+//     .then(user => {
+//         if (user) {
+//             console.log("User found:", user);
+//         } else {
+//             console.log("User not found");
+//         }
+//     })
+//     .catch(error => {
+//         console.log("Error:", error.message);
+//     });
+
+// Delete user 
+
+// Find the user by email and delete
+// User.findOneAndDelete({ email: "MDSRANA11@Gmail.com" })
+//     .then(deletedUser => {
+//         if (deletedUser) {
+//             console.log("User deleted:", deletedUser);
+//         } else {
+//             console.log("User not found");
+//         }
+//     })
+//     .catch(error => {
+//         console.log("Error:", error.message);
+//     });
+
+
+//Update user info
+
+
+// Find the user by email and update their age
+// User.findOneAndUpdate(
+//      { 
+//         email: "MDSRANA11@Gmail.com" 
+//      },
+//      { 
+//         $set: { age: 18 } 
+//      },
+//      { 
+//         new: true 
+//      } // To return the updated document
+// )
+//     .then(updatedUser => {
+//         if (updatedUser) {
+//             console.log("User updated:", updatedUser);
+//         } else {
+//             console.log("User not found");
+//         }
+//     })
+//     .catch(error => {
+//         console.log("Error:", error.message);
+//     });

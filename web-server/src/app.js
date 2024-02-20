@@ -1,10 +1,9 @@
 // Run all the files together we have to use this command ------nodemon src/app.js -e js,hbs
-
-
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
-
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 const app = express()
 
 // Define paths for Express config
@@ -42,14 +41,52 @@ app.get('/help', (req, res) => {
     })
 })
 
-app.get('/weather', (req, res) => {
+app.get('/weather', (req, res) => {  //IF the address is missing on the search bar then  this error message will be shown.
+    if(!req.query.address){
+        return res.send({
+            error: 'You must provide an address.'
+        })
+    }
+
+    geocode(req.query.address, (error, {latitude, longitude, location}) => {
+        if (error){
+            return res.send({error})
+        }
+        forecast(latitude, longitude, (error, forecastData) => {
+           if(error){
+             return res.send({error})
+           }
+
+           res.send({
+            forecast: forecastData,
+            location,
+            address: req.query.address
+           })
+        })
+
+    })
+    // res.send({  //to get this as output just put this "http://localhost:3000/weather?address=philadelphia" to the search bar
+    //     forecast: 'It is snowing',
+    //     location: 'Philadelphia',
+    //     address: req.query.address
+    // })
+})
+
+app.get('/products', (req, res) => {
+
+    if(!req.query.search){
+        return res.send({
+            error: 'You must provide a search term'
+        })
+    }
+    console.log(req.query.search)
     res.send({
-        forecast: 'It is snowing',
-        location: 'Philadelphia'
+        products: []
     })
 })
 
-app.get('/help/*', (req, res) => {
+
+app.get('/help/*', (req, res) => {   //Thsis function is working for wildcat method
     res.render('404', {
         title: '404',
         name: 'Sohel',
@@ -57,7 +94,7 @@ app.get('/help/*', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
+app.get('*', (req, res) => {   //This is a wildcat too it will work only when no file will be found out.
     res.render('404', {
         title: '404',
         name: 'Sohel',
